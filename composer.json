@@ -1,0 +1,17 @@
+{
+    "name": "cleme/php-mvc-starter",
+    "description": "Basic PHP-MVC Starter Application with Built-In Local Authentication Strategy",
+    "type": "project",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Steven Clements",
+            "email": "clements.steven07@outlook.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.6",
+        "symfony/uid": "^6.0",
+        "firebase/php-jwt": "^6.1"
+    }
+}
