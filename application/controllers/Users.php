@@ -238,4 +238,72 @@ class Users extends Controller {
       $this->view($data['page_url'], $data);
     }
   }
+
+  /* ~ ~ ~ ~ ~ ${ Create View for Login Page } ~ ~ ~ ~ ~ */
+  public function login() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      /* - - - - - < Filter & Sanitize User Input /> - - - - - */
+      $_POST = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
+
+      /* - - - - - < Make Data Available to Application /> - - - - - */
+      $data = [
+        'page_title' => 'Member Login | ' . APP_NAME,
+        'page_description' => '',
+        'page_keywords' => '',
+        'page_url' => '/users/login',
+        'user_email' => trim($_POST['email']),
+        'user_password' => trim($_POST['password']),
+        'email_error' => '',
+        'password_error' => ''
+      ];
+
+      /* - - - - - < Check that Input Fields are Valid /> - - - - - */
+      if (empty($data['user_email'])) {
+        $data['email_error'] = '';
+      } else if (!filter_var($data['user_email'], FILTER_VALIDATE_EMAIL)) {
+        $data['email_error'] = '';
+      }
+
+      if (empty($data['user_password'])) {
+        $data['password_error'] = '';
+      }
+
+      /* - - - - - < Perform Form Validation /> - - - - - */
+      if (empty($data['email_error']) && empty($data['password_error'])) {
+        /* * * * * ( Verify User Verification Code Entry )=> * * * * */
+        $user = $this->userModel->verifyUserPassword($data['user_email'], $data['user_password']);
+        
+        if ($user) {
+          // <> Attempt a New User Session </>
+          $this->attemptNewUserSession($user);
+        } else {
+          // <> Prepare a Flash Error Message </>
+          flash('login_error', '');
+
+          // <> Reload the View with the Error </>
+          $this->view($data['page_url'], $data);
+        }
+      } else {
+        /* * * * * ( Reload the View with the Error(s) )=> * * * * */
+        $this->view($data['page_url'], $data);
+      }
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+      /* - - - - - < Make Data Available to Application /> - - - - - */
+      $data = [
+        'page_title' => 'Member Login | ' . APP_NAME,
+        'page_description' => '',
+        'page_keywords' => '',
+        'page_url' => '/users/login',
+        'user_email' => '',
+        'user_password' => '',
+        'email_error' => '',
+        'password_error' => ''
+      ];
+
+      /* - - - - - < Load the View & Pass in the Data /> - - - - - */
+      $this->view($data['page_url'], $data);
+    }
+  }
 }

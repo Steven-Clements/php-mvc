@@ -34,7 +34,7 @@
     <div class="button-group">
       <button type="submit" class="btn btn-primary">Register</button>
     </div>
-    <p class="form-text">Already have an account? <a href="" class="form-link">Login Here!</a></p>
+    <p class="form-text">Already have an account? <a href="<?php echo URL_ROOT; ?>/users/login" class="form-link">Login Here!</a></p>
   </form>
 </main>
 <?php include APP_ROOT . '/views/includes/footer.php'; ?>
