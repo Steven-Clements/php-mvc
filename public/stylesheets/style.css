@@ -1,0 +1,95 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#register-page {
+  font-family: 'Arial';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#register-verify-banner {
+  background: url('../images/register-verify.jpg') no-repeat center center/cover;
+  height: 100vh;
+  width: 60vw;
+}
+
+.auth-form-40 {
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.form-heading {
+  margin: 1.5rem;
+}
+
+.form-logo {
+  margin: 0 auto 0.5rem;
+  background: url('../images/favicon.ico') no-repeat center center/cover;
+  height: 75px;
+  width: 75px;
+}
+
+.input-group,
+.button-group {
+  margin: 0.65rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.input-group label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.input-text {
+  margin: 0.35rem;
+  padding: 0.35rem;
+  font-size: 1.1rem;
+  border-radius: 7px;
+}
+
+.input-check {
+  height: 25px;
+  width: 25px;
+}
+
+.alrt {
+  margin: 0.35rem auto 0;
+  padding: 0.65rem;
+}
+
+.alrt-error {
+  background-color: coral;
+  color: crimson;
+}
+
+.btn {
+  padding: 0.75rem 1.25rem;
+  font-size: 1.05rem;
+  border-radius: 7px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.btn-primary {
+  background-color: royalblue;
+  color: white;
+}
+
+.form-link {
+  text-decoration: none;
+  font-weight: bold;
+  color: royalblue;
+}
