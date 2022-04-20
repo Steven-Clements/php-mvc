@@ -4,7 +4,8 @@
   padding: 0;
 }
 
-#register-page {
+#register-page,
+#verify-page {
   font-family: 'Arial';
   display: flex;
   justify-content: center;

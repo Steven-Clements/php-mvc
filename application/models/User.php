@@ -33,6 +33,21 @@ class User {
     return $code;
   }
 
+  /* ~ ~ ~ ~ ~ ${ Mark a User Email Address as Verified } ~ ~ ~ ~ ~ */
+  private function markUserEmailVerified($email) {
+    $this->db->query('UPDATE Users SET status = :status, verification = :verification WHERE email = :email');
+
+    $this->db->bind(':verification', null);
+    $this->db->bind(':status', 'Active');
+    $this->db->bind(':email', $email);
+
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   /* ~ ~ ~ ~ ~ ${ Find a User By Email } ~ ~ ~ ~ ~ */
   public function findUserByEmail($email) {
     $this->db->query('SELECT * FROM Users WHERE email = :email');
@@ -73,6 +88,22 @@ class User {
 
     if ($this->db->execute()) {
       return true;
+    } else {
+      return false;
+    }
+  }
+
+  /* ~ ~ ~ ~ ~ ${ Verify a User Verification Code Entry } ~ ~ ~ ~ ~ */
+  public function verifyUserVerificationCode($email, $code) {
+    $this->db->query('SELECT * FROM Users WHERE email = :email');
+    
+    $this->db->bind(':email', $email);
+
+    $user = $this->db->single();
+
+    if (password_verify($code, $user->verification)) {
+      $this->markUserEmailVerified($email);
+      return $user;
     } else {
       return false;
     }
